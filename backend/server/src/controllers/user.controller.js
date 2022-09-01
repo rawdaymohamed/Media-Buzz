@@ -57,17 +57,13 @@ const update = async (req, res) => {
                 error: 'Photo could not be uploaded'
             })
         }
-
         let user = req.profile
-        console.log(fields)
         user = extend(user, fields)
-        console.log(user)
 
         if (files.photo) {
             user.photo.data = fs.readFileSync(files.photo.filepath)
             user.photo.contentType = files.photo.type
         }
-
         try {
             await user.save()
 

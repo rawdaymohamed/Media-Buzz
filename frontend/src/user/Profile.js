@@ -21,6 +21,7 @@ const Profile = () => {
   const { id } = useParams();
   const [user, setUser] = React.useState({});
   const [redirectToSignin, setRedirectToSignin] = React.useState(false);
+  const photoUrl = `/api/users/${id}/photo`;
   React.useEffect(() => {
     const abortController = new AbortController();
     const signal = abortController.signal;
@@ -45,9 +46,13 @@ const Profile = () => {
         <Paper elevation={3} sx={{ maxWidth: 600, mx: 'auto', padding: 3 }}>
           <Typography variant='h6'>Profile</Typography>
           <List dense>
-            <ListItem>
+            <ListItem sx={{ mb: 2 }}>
               <ListItemAvatar>
-                <Avatar alt={`${user.name} profile`} />
+                <Avatar
+                  alt={`${user.name} profile`}
+                  src={photoUrl}
+                  sx={{ width: 60, height: 60, mr: 2 }}
+                />
               </ListItemAvatar>
               <ListItemText primary={user.name} secondary={user.email} />
               {isAuthenticated().user &&
