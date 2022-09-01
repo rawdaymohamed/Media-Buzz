@@ -30,14 +30,14 @@ const EditProfile = () => {
   const [photo, setPhoto] = React.useState('');
   const [redirectToLogin, setRedirectToLogin] = React.useState(false);
   const [redirectToProfile, setRedirectToProfile] = React.useState(false);
-  const photoUrl = id
-    ? `/api/users/${id}/photo/`
-    : '/api/users/photos/defaultphoto';
+  const [photoUrl, setPhotoUrl] = React.useState('');
+
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
 
   React.useEffect(() => {
+    setPhotoUrl(`/api/users/${id}/photo`);
     const abortController = new AbortController();
     const signal = abortController.signal;
 

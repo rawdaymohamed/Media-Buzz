@@ -51,7 +51,10 @@ const Users = () => {
                     to={`/users/${user._id}/profile/`}
                   >
                     <ListItemAvatar>
-                      <Avatar alt={`${user.name} avatar`} />
+                      <Avatar
+                        alt={`${user.name} avatar`}
+                        src={`/api/users/${user._id}/photo`}
+                      />
                     </ListItemAvatar>
                     <ListItemText id={user._id} primary={`${user.name}`} />
                     <ArrowForwardIcon />

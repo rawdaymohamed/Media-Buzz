@@ -25,8 +25,8 @@ const Profile = () => {
   React.useEffect(() => {
     const abortController = new AbortController();
     const signal = abortController.signal;
-    const jwt = isAuthenticated();
 
+    const jwt = isAuthenticated();
     read(id, jwt, signal).then((data) => {
       if (data && data.error) {
         setRedirectToSignin(true);

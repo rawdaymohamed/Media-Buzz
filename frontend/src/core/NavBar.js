@@ -182,7 +182,10 @@ const NavBar = () => {
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title='Open settings'>
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt='User' />
+                  <Avatar
+                    alt={`${isAuthenticated().user.name} avatar`}
+                    src={`/api/users/${isAuthenticated().user._id}/photo`}
+                  />
                 </IconButton>
               </Tooltip>
               <Menu
