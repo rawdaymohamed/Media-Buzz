@@ -28,8 +28,13 @@ existing social media platforms such as Facebook and Twitter.
 
 This project is built with the MERN Stack and has the following features:
 
+### Done
+
 - User Authentication
 - User profile with a description and a photo
+
+### ToDo
+
 - Users following each other
 - Who to follow suggestions
 - Posting messages with photos
