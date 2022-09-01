@@ -74,6 +74,11 @@ const Profile = () => {
             </ListItem>
 
             <Divider />
+            {user.about && (
+              <ListItem>
+                <ListItemText primary={user.about} />
+              </ListItem>
+            )}
             <ListItem>
               <ListItemText
                 primary={'Joined: ' + new Date(user.created).toDateString()}

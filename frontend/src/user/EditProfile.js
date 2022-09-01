@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Link as RouterLink, Navigate, useParams } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
+import TextField from '@mui/material/TextField';
 
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
@@ -25,7 +26,9 @@ const EditProfile = () => {
   const [password, setPassword] = React.useState('');
   const [error, setError] = React.useState('');
   const [showPassword, setShowPassword] = React.useState(false);
+  const [about, setAbout] = React.useState('');
   const [redirectToLogin, setRedirectToLogin] = React.useState(false);
+
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
@@ -42,6 +45,7 @@ const EditProfile = () => {
         } else if (data) {
           setName(data.name);
           setEmail(data.email);
+          setAbout(data.about);
         }
       });
     }
@@ -54,6 +58,7 @@ const EditProfile = () => {
       name: name,
       email: email,
       password: password,
+      about: about,
     };
 
     const jwt = isAuthenticated();
@@ -107,7 +112,7 @@ const EditProfile = () => {
               </FormControl>
             </div>
             <div>
-              <FormControl sx={{ m: 1 }} variant='outlined'>
+              <FormControl sx={{ m: 1, width: '266px' }} variant='outlined'>
                 <InputLabel htmlFor='password'>Password</InputLabel>
                 <OutlinedInput
                   id='password'
@@ -130,7 +135,18 @@ const EditProfile = () => {
                 />
               </FormControl>
             </div>
-
+            <FormControl sx={{ m: 1, width: '266px' }} variant='outlined'>
+              <TextField
+                id='about'
+                label='about'
+                value={about}
+                onChange={(e) => setAbout(e.target.value)}
+                multiline
+                rows={4}
+                defaultValue=''
+                variant='standard'
+              />
+            </FormControl>
             <br />
             {error && (
               <Typography
