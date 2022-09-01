@@ -29,6 +29,7 @@ const EditProfile = () => {
   const [about, setAbout] = React.useState('');
   const [photo, setPhoto] = React.useState('');
   const [redirectToLogin, setRedirectToLogin] = React.useState(false);
+  const [redirectToProfile, setRedirectToProfile] = React.useState(false);
   const photoUrl = id
     ? `/api/users/${id}/photo/`
     : '/api/users/photos/defaultphoto';
@@ -75,11 +76,13 @@ const EditProfile = () => {
           setError(data.error);
         } else if (data) {
           setError('');
+          setRedirectToProfile(true);
         }
       });
     }
   };
   if (redirectToLogin) return <Navigate to='/signin' />;
+  if (redirectToProfile) return <Navigate to={`/users/${id}/profile`} />;
   return (
     <>
       <Card
