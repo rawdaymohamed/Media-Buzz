@@ -10,6 +10,8 @@ router
     .get(authCtrl.requireSigin, userCtrl.read)
     .put(authCtrl.requireSigin, authCtrl.hasAuthorization, userCtrl.update)
     .delete(authCtrl.requireSigin, authCtrl.hasAuthorization, userCtrl.remove)
+router.route('/api/users/:userId/photo').get(userCtrl.photo, userCtrl.defaultPhoto)
+router.route('/api/users/photos/defaultphoto').get(userCtrl.defaultPhoto)
 
 export default router
 

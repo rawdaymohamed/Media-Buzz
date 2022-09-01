@@ -6,14 +6,14 @@ import cookieParser from 'cookie-parser'
 import cors from 'cors'
 import userRoutes from './src/routes/user.routes'
 import authRoutes from './src/routes/auth.routes'
-
+import 'dotenv/config'
 const app = express()
 const port = process.env.PORT || 4000
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cookieParser())
 app.use(cors({ origin: '*' }))
-
+// app.use('/public', express.static(__dirname + '/public'))
 app.use('/', userRoutes)
 app.use('/', authRoutes)
 app.get('/', (req, res) => {

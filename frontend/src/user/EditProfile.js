@@ -3,7 +3,6 @@ import { Link as RouterLink, Navigate, useParams } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import TextField from '@mui/material/TextField';
-
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
 import InputAdornment from '@mui/material/InputAdornment';
@@ -16,9 +15,10 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import ErrorIcon from '@mui/icons-material/Error';
+import Avatar from '@mui/material/Avatar';
 import { read, update } from './api-user';
 import { isAuthenticated } from '../auth/auth-helper';
-
+import FileUploadIcon from '@mui/icons-material/FileUpload';
 const EditProfile = () => {
   const { id } = useParams();
   const [name, setName] = React.useState('');
@@ -27,14 +27,19 @@ const EditProfile = () => {
   const [error, setError] = React.useState('');
   const [showPassword, setShowPassword] = React.useState(false);
   const [about, setAbout] = React.useState('');
+  const [photo, setPhoto] = React.useState('');
   const [redirectToLogin, setRedirectToLogin] = React.useState(false);
-
+  const photoUrl = id
+    ? `/api/users/${id}/photo/`
+    : '/api/users/photos/defaultphoto';
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
+
   React.useEffect(() => {
     const abortController = new AbortController();
     const signal = abortController.signal;
+
     const jwt = isAuthenticated();
     if (!jwt) {
       setRedirectToLogin(true);
@@ -45,7 +50,7 @@ const EditProfile = () => {
         } else if (data) {
           setName(data.name);
           setEmail(data.email);
-          setAbout(data.about);
+          data.about && setAbout(data.about);
         }
       });
     }
@@ -54,18 +59,18 @@ const EditProfile = () => {
     };
   }, [id]);
   const handleSubmit = () => {
-    const user = {
-      name: name,
-      email: email,
-      password: password,
-      about: about,
-    };
+    let userData = new FormData();
+    name && userData.append('name', name);
+    email && userData.append('email', email);
+    password && userData.append('password', password);
+    about && userData.append('about', about);
+    photo && userData.append('photo', photo);
 
     const jwt = isAuthenticated();
     if (!jwt) {
       setRedirectToLogin(true);
     } else {
-      update(id, jwt, user).then((data) => {
+      update(id, jwt, userData).then((data) => {
         if (data && data.error) {
           setError(data.error);
         } else if (data) {
@@ -81,10 +86,32 @@ const EditProfile = () => {
         sx={{ maxWidth: 600, mx: 'auto', my: 2, textAlign: 'center', p: 1 }}
       >
         <CardContent>
-          <Typography variant='h5' component='div' sx={{ mb: 3 }}>
+          <Typography variant='h6' component='div' sx={{ mb: 1 }}>
             Edit Profile
           </Typography>
           <Box sx={{ mx: 'auto', maxWidth: 600 }}>
+            <div>
+              <Avatar
+                alt={`${name} avatar`}
+                src={photoUrl}
+                sx={{ mx: 'auto', mb: 2, width: 60, height: 60 }}
+              />
+              <Button
+                variant='outlined'
+                size='small'
+                sx={{ mb: 2 }}
+                component='label'
+              >
+                Upload <FileUploadIcon />
+                <input
+                  hidden
+                  accept='image/*'
+                  onChange={(e) => setPhoto(e.target.files[0])}
+                  type='file'
+                />
+              </Button>
+              <span>{photo ? photo.name : ''}</span>
+            </div>
             <div>
               <FormControl sx={{ m: 1, width: '266px' }} variant='outlined'>
                 <InputLabel htmlFor='name'>Name</InputLabel>
@@ -143,8 +170,7 @@ const EditProfile = () => {
                 onChange={(e) => setAbout(e.target.value)}
                 multiline
                 rows={4}
-                defaultValue=''
-                variant='standard'
+                variant='outlined'
               />
             </FormControl>
             <br />

@@ -47,10 +47,11 @@ const update = async (id, jwt, user) => {
       method: 'PUT',
       headers: {
         Accept: 'application/json',
-        'Content-Type': 'application/json',
+        // 'Content-Type': 'application/json',
         Authorization: `Bearer ${jwt.token}`,
       },
-      body: JSON.stringify(user),
+      // body: JSON.stringify(user),
+      body: user,
     });
     return response.json();
   } catch (err) {

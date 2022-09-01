@@ -1,6 +1,9 @@
 import User from '../models/user.model'
 import extend from 'lodash/extend'
 import errorHandler from '../helpers/dbErrorHandler'
+import formidable from 'formidable'
+import fs from 'fs'
+
 const create = async (req, res) => {
     try {
         const { email } = req.body
@@ -46,19 +49,38 @@ const read = (req, res) => {
     return res.json(req.profile)
 }
 const update = async (req, res) => {
-    try {
+    const form = new formidable.IncomingForm()
+    form.keepExtensions = true
+    form.parse(req, async (err, fields, files) => {
+        if (err) {
+            return res.status(400).json({
+                error: 'Photo could not be uploaded'
+            })
+        }
+
         let user = req.profile
-        user.updated = Date().now
-        user = extend(user, req.body)
-        await user.save()
-        user.hashedPassword = undefined
-        user.salt = undefined
-        res.json(user)
-    } catch (err) {
-        return res.status(400).json({
-            error: errorHandler.getErrorMessage(err)
-        })
-    }
+        console.log(fields)
+        user = extend(user, fields)
+        console.log(user)
+
+        if (files.photo) {
+            user.photo.data = fs.readFileSync(files.photo.filepath)
+            user.photo.contentType = files.photo.type
+        }
+
+        try {
+            await user.save()
+
+            user.hashedPassword = undefined
+            user.salt = undefined
+            user.updated = Date.now()
+            return res.json(user)
+        } catch (error) {
+            return res.status(400).json({
+                error: errorHandler.getErrorMessage(error)
+            })
+        }
+    })
 }
 const remove = async (req, res) => {
     try {
@@ -73,5 +95,17 @@ const remove = async (req, res) => {
         })
     }
 }
-export default { create, list, userByID, read, update, remove }
+const photo = (req, res, next) => {
+    if (req.profile.photo.data) {
+        res.set('Content-Type', req.profile.photo.contentType)
+        return res.send(req.profile.photo.data)
+    }
+    next()
+}
+
+const defaultPhoto = (req, res) => {
+    return res.sendFile('profile-pic.png', { root: 'public' })
+}
+
+export default { create, list, userByID, read, update, remove, photo, defaultPhoto }
 
