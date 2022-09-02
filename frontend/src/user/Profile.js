@@ -17,7 +17,7 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
 import FollowUserButton from './FollowUserButton';
-
+import FollowGrid from './FollowGrid';
 const Profile = () => {
   const { id } = useParams();
   const [user, setUser] = React.useState({ following: [], followers: [] });
@@ -67,7 +67,7 @@ const Profile = () => {
     <>
       {user && (
         <Paper elevation={3} sx={{ maxWidth: 600, mx: 'auto', padding: 3 }}>
-          <Typography variant='h6'>Profile</Typography>
+          <Typography variant='h5'>Profile</Typography>
           <List dense>
             <ListItem sx={{ mb: 2 }}>
               <ListItemAvatar>
@@ -118,6 +118,19 @@ const Profile = () => {
               />
             </ListItem>
           </List>
+          <Divider />
+          <Typography sx={{ my: 1 }} variant='h6'>
+            Followers
+          </Typography>
+          {user.followers.length ? (
+            <>
+              <FollowGrid people={user.followers} />
+            </>
+          ) : (
+            <>
+              <Typography>{user.name} has no followers</Typography>
+            </>
+          )}
         </Paper>
       )}
     </>

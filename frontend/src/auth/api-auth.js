@@ -14,6 +14,7 @@ const signin = async (user) => {
     console.log(err);
   }
 };
+
 const signout = async () => {
   try {
     const response = await fetch('/auth/signout/', { method: 'GET' });

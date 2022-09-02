@@ -108,7 +108,10 @@ const defaultPhoto = (req, res) => {
 
 const addFollowing = async (req, res, next) => {
     try {
-        await User.findByIdAndUpdate(req.body.userId, { $push: { following: req.body.followId } })
+        await User.findByIdAndUpdate(req.body.userId, {
+            $push: { following: req.body.followId }
+        })
+
         next()
     } catch (err) {
         return res.status(400).json({
