@@ -74,4 +74,37 @@ const remove = async (id, jwt) => {
     console.log(err);
   }
 };
-export { list, create, read, update, remove };
+const follow = async (id, jwt, followId) => {
+  try {
+    const response = await fetch('/api/users/follow', {
+      method: 'PUT',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${jwt.token}`,
+      },
+      body: JSON.stringify({ userId: id, followId }),
+    });
+    console.log(JSON.stringify({ userId: id, followId }));
+    return await response.json();
+  } catch (err) {
+    console.log(err);
+  }
+};
+const unfollow = async (id, jwt, unfollowId) => {
+  try {
+    const response = await fetch('/api/users/unfollow', {
+      method: 'PUT',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${jwt.token}`,
+      },
+      body: JSON.stringify({ userId: id, unfollowId }),
+    });
+    return await response.json();
+  } catch (err) {
+    console.log(err);
+  }
+};
+export { list, create, read, update, remove, follow, unfollow };

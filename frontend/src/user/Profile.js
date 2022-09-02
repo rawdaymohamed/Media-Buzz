@@ -16,28 +16,51 @@ import EditIcon from '@mui/icons-material/Edit';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
+import FollowUserButton from './FollowUserButton';
 
 const Profile = () => {
   const { id } = useParams();
-  const [user, setUser] = React.useState({});
+  const [user, setUser] = React.useState({ following: [], followers: [] });
+  const [following, setFollowing] = React.useState(false);
   const [redirectToSignin, setRedirectToSignin] = React.useState(false);
+  const [error, setError] = React.useState(null);
   const photoUrl = `/api/users/${id}/photo`;
+  const jwt = isAuthenticated();
+
   React.useEffect(() => {
     const abortController = new AbortController();
     const signal = abortController.signal;
 
-    const jwt = isAuthenticated();
     read(id, jwt, signal).then((data) => {
       if (data && data.error) {
         setRedirectToSignin(true);
-      } else {
+      } else if (data) {
         setUser(data);
+        const checkFollowing = checkFollow(data);
+        setFollowing(checkFollowing);
       }
     });
     return function cleanup() {
       abortController.abort();
     };
-  }, [id]);
+  }, [id, jwt, following]);
+
+  const checkFollow = (user) => {
+    const match = user.followers.some(
+      (follower) => jwt.user._id == follower._id
+    );
+    return match;
+  };
+  const clickFollowButton = (callApi) => {
+    callApi(jwt.user._id, jwt, user._id).then((data) => {
+      if (data && data.error) {
+        setError(data.error);
+      } else if (data) {
+        setUser(data);
+        setFollowing(!following);
+      }
+    });
+  };
   if (redirectToSignin) return <Navigate to='/signin' />;
 
   return (
@@ -56,26 +79,31 @@ const Profile = () => {
               </ListItemAvatar>
               <ListItemText primary={user.name} secondary={user.email} />
               {isAuthenticated().user &&
-                isAuthenticated().user._id == user._id && (
-                  <ListItemSecondaryAction>
-                    {
-                      <IconButton
-                        to={`/users/${user._id}/edit`}
-                        component={RouterLink}
-                      >
-                        <EditIcon />
-                      </IconButton>
-                    }
-                    {
-                      <IconButton
-                        to={`/users/${user._id}/delete`}
-                        component={RouterLink}
-                      >
-                        <DeleteIcon />
-                      </IconButton>
-                    }
-                  </ListItemSecondaryAction>
-                )}
+              isAuthenticated().user._id == user._id ? (
+                <ListItemSecondaryAction>
+                  {
+                    <IconButton
+                      to={`/users/${user._id}/edit`}
+                      component={RouterLink}
+                    >
+                      <EditIcon />
+                    </IconButton>
+                  }
+                  {
+                    <IconButton
+                      to={`/users/${user._id}/delete`}
+                      component={RouterLink}
+                    >
+                      <DeleteIcon />
+                    </IconButton>
+                  }
+                </ListItemSecondaryAction>
+              ) : (
+                <FollowUserButton
+                  following={following}
+                  onButtonClick={clickFollowButton}
+                />
+              )}
             </ListItem>
 
             <Divider />
