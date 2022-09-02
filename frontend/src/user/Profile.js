@@ -18,6 +18,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
 import FollowUserButton from './FollowUserButton';
 import FollowGrid from './FollowGrid';
+import ProfileTabs from './ProfileTabs';
 const Profile = () => {
   const { id } = useParams();
   const [user, setUser] = React.useState({ following: [], followers: [] });
@@ -43,7 +44,7 @@ const Profile = () => {
     return function cleanup() {
       abortController.abort();
     };
-  }, [id, jwt, following]);
+  }, [id, user]);
 
   const checkFollow = (user) => {
     const match = user.followers.some(
@@ -119,18 +120,8 @@ const Profile = () => {
             </ListItem>
           </List>
           <Divider />
-          <Typography sx={{ my: 1 }} variant='h6'>
-            Followers
-          </Typography>
-          {user.followers.length ? (
-            <>
-              <FollowGrid people={user.followers} />
-            </>
-          ) : (
-            <>
-              <Typography>{user.name} has no followers</Typography>
-            </>
-          )}
+
+          <ProfileTabs user={user} />
         </Paper>
       )}
     </>
