@@ -17,8 +17,9 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
 import FollowUserButton from './FollowUserButton';
-import FollowGrid from './FollowGrid';
 import ProfileTabs from './ProfileTabs';
+import ErrorIcon from '@mui/icons-material/Error';
+
 const Profile = () => {
   const { id } = useParams();
   const [user, setUser] = React.useState({ following: [], followers: [] });
@@ -27,7 +28,12 @@ const Profile = () => {
   const [error, setError] = React.useState(null);
   const photoUrl = `/api/users/${id}/photo`;
   const jwt = isAuthenticated();
-
+  const checkFollow = (user) => {
+    const match = user.followers.some(
+      (follower) => jwt.user._id == follower._id
+    );
+    return match;
+  };
   React.useEffect(() => {
     const abortController = new AbortController();
     const signal = abortController.signal;
@@ -44,14 +50,8 @@ const Profile = () => {
     return function cleanup() {
       abortController.abort();
     };
-  }, [id, user]);
+  }, [id, jwt]);
 
-  const checkFollow = (user) => {
-    const match = user.followers.some(
-      (follower) => jwt.user._id == follower._id
-    );
-    return match;
-  };
   const clickFollowButton = (callApi) => {
     callApi(jwt.user._id, jwt, user._id).then((data) => {
       if (data && data.error) {
@@ -122,6 +122,22 @@ const Profile = () => {
           <Divider />
 
           <ProfileTabs user={user} />
+          {error && (
+            <Typography
+              component='p'
+              color='error'
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <ErrorIcon color='error' sx={{ mr: '3px' }}>
+                error
+              </ErrorIcon>
+              {error}
+            </Typography>
+          )}
         </Paper>
       )}
     </>

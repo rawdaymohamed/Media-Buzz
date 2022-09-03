@@ -2,7 +2,7 @@ import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
 import { Box, Button, Container, Typography } from '@mui/material';
-export default function NotFound() {
+const NotFound = () => {
   return (
     <Box
       sx={{
@@ -35,4 +35,5 @@ export default function NotFound() {
       </Container>
     </Box>
   );
-}
+};
+export default NotFound;

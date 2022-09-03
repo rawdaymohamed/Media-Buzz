@@ -17,7 +17,6 @@ import Typography from '@mui/material/Typography';
 import useInput from '../hooks/useInput';
 import { signin } from './api-auth';
 import { authenticate } from './auth-helper';
-import { Paper } from '@mui/material';
 
 const Signin = () => {
   const [passwordProps, resetPassword] = useInput('');

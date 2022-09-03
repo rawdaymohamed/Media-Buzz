@@ -9,6 +9,7 @@ import Signup from './user/Signup';
 import Users from './user/Users';
 import NotFound from './core/NotFound';
 import NavBar from './core/NavBar';
+import FindPeople from './user/FindPeople';
 function App() {
   return (
     <>
@@ -21,6 +22,7 @@ function App() {
         <Route path='/users/:id/profile' element={<Profile />} exact />
         <Route path='/users/:id/delete' element={<DeleteUser />} exact />
         <Route path='/users/:id/edit' element={<EditProfile />} exact />
+        <Route path='/users/:id/findpeople' element={<FindPeople />} exact />
         <Route path='*' element={<NotFound />} />
       </Routes>
     </>

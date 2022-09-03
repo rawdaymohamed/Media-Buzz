@@ -8,6 +8,7 @@ const FollowUserButton = ({ following, onButtonClick }) => {
   const onUnFollowClick = () => {
     onButtonClick(unfollow);
   };
+
   return (
     <>
       {following ? (

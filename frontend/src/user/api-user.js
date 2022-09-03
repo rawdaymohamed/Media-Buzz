@@ -107,4 +107,19 @@ const unfollow = async (id, jwt, unfollowId) => {
     console.log(err);
   }
 };
-export { list, create, read, update, remove, follow, unfollow };
+const findPeople = async (params, jwt, signal) => {
+  try {
+    const response = await fetch(`/api/users/${params.id}/findpeople`, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${jwt.token}`,
+      },
+    });
+    return await response.json();
+  } catch (err) {
+    console.log(err);
+  }
+};
+export { list, create, read, update, remove, follow, unfollow, findPeople };

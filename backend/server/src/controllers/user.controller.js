@@ -108,6 +108,10 @@ const defaultPhoto = (req, res) => {
 
 const addFollowing = async (req, res, next) => {
     try {
+        if (req.body.userId === req.body.followId)
+            return res.status(400).json({
+                error: "You can't follow yourself"
+            })
         await User.findByIdAndUpdate(req.body.userId, {
             $push: { following: req.body.followId }
         })
@@ -121,6 +125,10 @@ const addFollowing = async (req, res, next) => {
 }
 const addFollower = async (req, res) => {
     try {
+        if (req.body.userId === req.body.followId)
+            return res.status(400).json({
+                error: "You can't follow yourself"
+            })
         const result = await User.findByIdAndUpdate(
             req.body.followId,
             { $push: { followers: req.body.userId } },
@@ -163,6 +171,16 @@ const removeFollower = async (req, res) => {
         return res.status(400).json({ error: errorHandler.getErrorMessage(err) })
     }
 }
+const findPeople = async (req, res) => {
+    const following = req.profile.following
+    following.push(req.profile._id)
+    try {
+        const users = await User.find({ _id: { $nin: following } }).select('name following')
+        return res.json(users)
+    } catch (err) {
+        return res.status(400).json({ error: errorHandler.getErrorMessage(err) })
+    }
+}
 export default {
     create,
     list,
@@ -175,6 +193,7 @@ export default {
     addFollowing,
     addFollower,
     removeFollowing,
-    removeFollower
+    removeFollower,
+    findPeople
 }
 

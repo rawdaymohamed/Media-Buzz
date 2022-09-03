@@ -33,10 +33,10 @@ This project is built with the MERN Stack and has the following features:
 - User Authentication
 - User profile with a description and a photo
 - Users following each other
+- Who to follow suggestions
 
 ### ToDo
 
-- Who to follow suggestions
 - Posting messages with photos
 - Newsfeed with posts from followed users
 - Listing posts by user
