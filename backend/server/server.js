@@ -6,6 +6,7 @@ import cookieParser from 'cookie-parser'
 import cors from 'cors'
 import userRoutes from './src/routes/user.routes'
 import authRoutes from './src/routes/auth.routes'
+import postRoutes from './src/routes/post.routes'
 import 'dotenv/config'
 const app = express()
 const port = process.env.PORT || 4000
@@ -16,6 +17,7 @@ app.use(cors({ origin: '*' }))
 // app.use('/public', express.static(__dirname + '/public'))
 app.use('/', userRoutes)
 app.use('/', authRoutes)
+app.use('/', postRoutes)
 app.get('/', (req, res) => {
     res.send('Media Buzz Backend')
 })

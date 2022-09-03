@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import FollowGrid from './FollowGrid';
+import PostList from '../post/PostList';
 
 const ProfileTabs = ({ user }) => {
   const [tab, setTab] = React.useState(0);
@@ -17,6 +18,7 @@ const ProfileTabs = ({ user }) => {
         <Tabs value={tab} onChange={handleChange} centered sx={{ mb: 2 }}>
           <Tab label='Following' />
           <Tab label='Followers' />
+          <Tab label='Posts' />
         </Tabs>
       </Box>
       {tab === 0 && (
@@ -37,6 +39,7 @@ const ProfileTabs = ({ user }) => {
           }
         />
       )}
+      {tab === 2 && <PostList user={user} />}
     </>
   );
 };

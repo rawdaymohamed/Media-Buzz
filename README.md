@@ -34,12 +34,12 @@ This project is built with the MERN Stack and has the following features:
 - User profile with a description and a photo
 - Users following each other
 - Who to follow suggestions
+- Listing posts by user
 
 ### ToDo
 
 - Posting messages with photos
 - Newsfeed with posts from followed users
-- Listing posts by user
 - Liking posts
 - Commenting on posts
 

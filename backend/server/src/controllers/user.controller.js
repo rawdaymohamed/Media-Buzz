@@ -38,6 +38,8 @@ const userByID = async (req, res, next, id) => {
             return res.status(400).json({
                 error: 'User not found'
             })
+        user.hashedPassword = undefined
+        user.salt = undefined
         req.profile = user
         next()
     } catch (err) {
