@@ -13,5 +13,19 @@ const getPostsByUser = async (id, jwt) => {
     console.log(err);
   }
 };
-
-export default { getPostsByUser };
+const createPost = async (userId, jwt, post) => {
+  try {
+    const response = await fetch(`/api/users/${userId}/posts`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        Authorization: `Bearer ${jwt.token}`,
+      },
+      body: post,
+    });
+    return await response.json();
+  } catch (err) {
+    console.log(err);
+  }
+};
+export default { getPostsByUser, createPost };

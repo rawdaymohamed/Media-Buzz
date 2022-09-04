@@ -13,10 +13,11 @@ const PostList = ({ user }) => {
         setError(data.error);
       } else if (data) setPosts(data);
     });
-  }, [user, jwt]);
+  }, [user, posts, jwt]);
   return (
     <>
       {posts &&
+        user &&
         posts.map((post) => <Post key={post._id} user={user} post={post} />)}
     </>
   );

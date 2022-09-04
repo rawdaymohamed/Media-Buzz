@@ -27,6 +27,13 @@ const create = async (req, res) => {
         }
     })
 }
+const getPostPhoto = (req, res) => {
+    if (req.post.photo.data) {
+        res.set('Content-Type', req.profile.photo.contentType)
+        return res.send(req.post.photo.data)
+    }
+    return res.json({ error: 'No photo available' })
+}
 const postByID = async (req, res, next, postId) => {
     try {
         const post = await Post.findById(postId).populate('postedBy', '_id name').exec()
@@ -45,5 +52,5 @@ const getPostsByUser = async (req, res) => {
         return res.status(400).json({ error: "Couldn't get posts" })
     }
 }
-export default { create, postByID, getPostsByUser }
+export default { create, postByID, getPostsByUser, getPostPhoto }
 

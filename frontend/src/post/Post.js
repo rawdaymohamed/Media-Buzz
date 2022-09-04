@@ -20,7 +20,7 @@ const Post = ({ user, post }) => {
       <CardHeader
         avatar={
           <Avatar
-            src={`/api/users/${user._id}/photo`}
+            src={user ? `/api/users/${user._id}/photo` : ''}
             alt={`${user.name} avatar`}
           />
         }
@@ -31,8 +31,8 @@ const Post = ({ user, post }) => {
         <CardMedia
           component='img'
           height='194'
-          image='/static/images/cards/paella.jpg'
-          alt='Paella dish'
+          image={`http://localhost:4000/api/users/${user._id}/posts/${post._id}/photo`}
+          alt='post image'
         />
       )}
       <CardContent>

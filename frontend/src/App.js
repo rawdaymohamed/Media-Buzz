@@ -24,7 +24,7 @@ function App() {
         <Route path='/users/:id/delete' element={<DeleteUser />} exact />
         <Route path='/users/:id/edit' element={<EditProfile />} exact />
         <Route path='/users/:id/findpeople' element={<FindPeople />} exact />
-        <Route path='/users/:id/posts' element={<PostList />} exact />
+
         <Route path='*' element={<NotFound />} />
       </Routes>
     </>

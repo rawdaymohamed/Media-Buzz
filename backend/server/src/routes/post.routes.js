@@ -8,7 +8,7 @@ router
     .route('/api/users/:userId/posts')
     .post(authCtrl.requireSigin, authCtrl.requireSigin, postCtrl.create)
     .get(authCtrl.requireSigin, postCtrl.getPostsByUser)
-
+router.route('/api/users/:userId/posts/:postId/photo').get(postCtrl.getPostPhoto)
 router.param('userId', userCtrl.userByID)
 
 router.param('postId', postCtrl.postByID)

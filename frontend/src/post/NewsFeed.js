@@ -1,12 +1,12 @@
 import Card from '@mui/material/Card';
 import NewPostForm from './NewPostForm';
 import PostList from './PostList';
-const NewsFeed = () => {
+const NewsFeed = ({ user }) => {
   return (
     <>
       <Card>
-        <NewPostForm addPost={(f) => f} />
-        <PostList removePost={(f) => f} posts={null} />
+        {user && <NewPostForm user={user} />}
+        {/* <PostList user={user} removePost={(f) => f} /> */}
       </Card>
     </>
   );
