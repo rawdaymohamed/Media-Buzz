@@ -1,8 +1,8 @@
 import formidable from 'formidable'
 import fs from 'fs'
 import dbErrorHandler from '../helpers/dbErrorHandler.js'
-import Post from '../models/post.model.js'
-
+import Post from '../models/post.model'
+import User from '../models/user.model'
 const create = async (req, res) => {
     const form = new formidable.IncomingForm()
     form.keepExtensions = true
@@ -52,5 +52,21 @@ const getPostsByUser = async (req, res) => {
         return res.status(400).json({ error: "Couldn't get posts" })
     }
 }
-export default { create, postByID, getPostsByUser, getPostPhoto }
+const getRecommended = async (req, res) => {
+    try {
+        const followings = await User.findOne({ _id: req.params.userId }).select('following').exec()
+
+        const posts = []
+        for (const user of followings.following) {
+            const userPosts = await Post.find({ postedBy: user })
+            console.log('POSTS', userPosts)
+            posts.push({ userId: user._id, posts: userPosts })
+        }
+        res.status(200).json(posts)
+    } catch (err) {
+        res.status(400).json({ error: 'Cannot get recommended posts' })
+    }
+}
+
+export default { create, postByID, getPostsByUser, getPostPhoto, getRecommended }
 

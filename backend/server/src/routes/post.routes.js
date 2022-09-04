@@ -6,9 +6,12 @@ const router = express.Router()
 router.param('userId', userCtrl.userByID)
 router
     .route('/api/users/:userId/posts')
-    .post(authCtrl.requireSigin, authCtrl.requireSigin, postCtrl.create)
+    .post(authCtrl.requireSigin, authCtrl.hasAuthorization, postCtrl.create)
     .get(authCtrl.requireSigin, postCtrl.getPostsByUser)
 router.route('/api/users/:userId/posts/:postId/photo').get(postCtrl.getPostPhoto)
+router
+    .route('/api/users/:userId/recommended/posts')
+    .get(authCtrl.requireSigin, authCtrl.hasAuthorization, postCtrl.getRecommended)
 router.param('userId', userCtrl.userByID)
 
 router.param('postId', postCtrl.postByID)

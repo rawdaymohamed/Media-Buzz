@@ -25,7 +25,7 @@ const Post = ({ user, post }) => {
           />
         }
         title={`${user.name}`}
-        subheader={`${post.created}`}
+        subheader={`${new Date(post.created).toDateString()}`}
       />
       {post.photo && (
         <CardMedia
