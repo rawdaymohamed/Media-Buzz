@@ -41,4 +41,58 @@ const getRecommendedPosts = async (userId, jwt) => {
     console.log(err);
   }
 };
-export default { getPostsByUser, createPost, getRecommendedPosts };
+
+const addLike = async (postId, userId, jwt) => {
+  try {
+    const result = await fetch(`/api/posts/${postId}/users/${userId}/likes`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        Authorization: `Bearer ${jwt.token}`,
+      },
+    });
+    return await result.json();
+  } catch (err) {
+    console.log(err);
+  }
+};
+const removeLike = async (postId, userId, jwt) => {
+  try {
+    const result = await fetch(`/api/posts/${postId}/users/${userId}/likes`, {
+      method: 'DELETE',
+      headers: {
+        Accept: 'application/json',
+        Authorization: `Bearer ${jwt.token}`,
+      },
+    });
+    return await result.json();
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const getNumLikes = async (postId) => {
+  try {
+    const result = await fetch(`/api/posts/${postId}/likes`);
+    return await result.json();
+  } catch (err) {
+    console.log(err);
+  }
+};
+const checkLiked = async (postId, userId) => {
+  try {
+    const result = await fetch(`/api/posts/${postId}/users/${userId}/liked`);
+    return await result.json();
+  } catch (err) {
+    console.log(err);
+  }
+};
+export default {
+  getPostsByUser,
+  createPost,
+  getRecommendedPosts,
+  addLike,
+  removeLike,
+  getNumLikes,
+  checkLiked,
+};

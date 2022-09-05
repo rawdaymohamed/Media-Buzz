@@ -95,6 +95,25 @@ const removeLike = async (req, res) => {
         return res.status(400).json({ error: 'Cannot like the post' })
     }
 }
+const getNumLikes = async (req, res) => {
+    try {
+        const likes = await Post.find({ _id: req.params.postId }).select('likes').exec()
+
+        return res.status(200).json({ numberOfLikes: likes[0].likes.length })
+    } catch (err) {
+        res.status(400).json({ error: 'Cannot get the number of likes' })
+    }
+}
+const checkLiked = async (req, res) => {
+    try {
+        const user = await User.findOne({ _id: req.params.userId })
+        const post = await Post.findOne({ _id: req.params.postId })
+        if (post.likes.includes(user._id)) return res.status(200).json({ liked: true })
+        return res.status(200).json({ liked: false })
+    } catch (err) {
+        return res.status(400).json({ error: 'Cannot check liked post' })
+    }
+}
 export default {
     create,
     postByID,
@@ -102,6 +121,8 @@ export default {
     getPostPhoto,
     getRecommended,
     addLike,
-    removeLike
+    removeLike,
+    getNumLikes,
+    checkLiked
 }
 

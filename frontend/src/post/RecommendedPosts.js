@@ -12,11 +12,10 @@ const RecommendedPosts = () => {
       if (data && data.error) {
         setError(data.error);
       } else if (data) {
-        console.log(data);
         setTotalPosts(data);
       }
     });
-  }, [userId]);
+  }, [userId, jwt]);
 
   return (
     <>

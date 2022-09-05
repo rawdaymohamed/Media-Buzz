@@ -6,9 +6,10 @@ const router = express.Router()
 router.param('userId', userCtrl.userByID)
 router
     .route('/api/posts/:postId/users/:userId/likes')
-    .post(authCtrl.requireSigin, authCtrl.hasAuthorization, postCtrl.addLike)
-    .delete(authCtrl.requireSigin, authCtrl.hasAuthorization, postCtrl.removeLike)
-
+    .post(authCtrl.requireSigin, postCtrl.addLike)
+    .delete(authCtrl.requireSigin, postCtrl.removeLike)
+router.route('/api/posts/:postId/likes').get(postCtrl.getNumLikes)
+router.route('/api/posts/:postId/users/:userId/liked').get(postCtrl.checkLiked)
 router
     .route('/api/users/:userId/posts')
     .post(authCtrl.requireSigin, authCtrl.hasAuthorization, postCtrl.create)
