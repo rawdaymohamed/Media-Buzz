@@ -59,8 +59,8 @@ const getRecommended = async (req, res) => {
         const posts = []
         for (const user of followings.following) {
             const userPosts = await Post.find({ postedBy: user })
-            console.log('POSTS', userPosts)
-            posts.push({ userId: user._id, posts: userPosts })
+            const userData = await User.findOne({ _id: user }).select('_id name photo').exec()
+            posts.push({ user: userData, posts: userPosts })
         }
         res.status(200).json(posts)
     } catch (err) {

@@ -55,7 +55,7 @@ const NewPostForm = ({ user }) => {
         />
 
         <CardContent>
-          <Box sx={{ mx: 'auto', maxWidth: 600 }}>
+          <Box sx={{ maxWidth: 600 }}>
             <FormControl sx={{ p: 2, width: '480px' }} variant='outlined'>
               <TextField
                 id='post'

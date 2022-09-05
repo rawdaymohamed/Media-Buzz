@@ -28,4 +28,17 @@ const createPost = async (userId, jwt, post) => {
     console.log(err);
   }
 };
-export default { getPostsByUser, createPost };
+const getRecommendedPosts = async (userId, jwt) => {
+  try {
+    const result = await fetch(`/api/users/${userId}/recommended/posts`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${jwt.token}`,
+      },
+    });
+    return await result.json();
+  } catch (err) {
+    console.log(err);
+  }
+};
+export default { getPostsByUser, createPost, getRecommendedPosts };

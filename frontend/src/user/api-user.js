@@ -107,9 +107,9 @@ const unfollow = async (id, jwt, unfollowId) => {
     console.log(err);
   }
 };
-const findPeople = async (params, jwt, signal) => {
+const findPeople = async (id, jwt) => {
   try {
-    const response = await fetch(`/api/users/${params.id}/findpeople`, {
+    const response = await fetch(`/api/users/${id}/findpeople`, {
       method: 'GET',
       headers: {
         Accept: 'application/json',

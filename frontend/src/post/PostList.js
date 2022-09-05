@@ -18,7 +18,14 @@ const PostList = ({ user }) => {
     <>
       {posts &&
         user &&
-        posts.map((post) => <Post key={post._id} user={user} post={post} />)}
+        posts.map((post) => (
+          <Post
+            key={post._id}
+            userId={user._id}
+            userName={user.name}
+            post={post}
+          />
+        ))}
     </>
   );
 };
