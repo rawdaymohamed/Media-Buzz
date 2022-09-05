@@ -67,6 +67,41 @@ const getRecommended = async (req, res) => {
         res.status(400).json({ error: 'Cannot get recommended posts' })
     }
 }
-
-export default { create, postByID, getPostsByUser, getPostPhoto, getRecommended }
+const addLike = async (req, res) => {
+    try {
+        const result = await Post.find({ _id: req.params.postId }).select('likes').exec()
+        if (result[0].likes.includes(req.params.userId)) {
+            return res.status(400).json({ error: 'Already liked the post' })
+        }
+        const post = await Post.findByIdAndUpdate(
+            req.params.postId,
+            { $push: { likes: req.params.userId } },
+            { new: true }
+        )
+        return res.status(200).json(post)
+    } catch (err) {
+        return res.status(400).json({ error: 'Cannot like the post' })
+    }
+}
+const removeLike = async (req, res) => {
+    try {
+        const post = await Post.findByIdAndUpdate(
+            req.params.postId,
+            { $pull: { likes: req.params.userId } },
+            { new: true }
+        )
+        res.status(200).json(post)
+    } catch (err) {
+        return res.status(400).json({ error: 'Cannot like the post' })
+    }
+}
+export default {
+    create,
+    postByID,
+    getPostsByUser,
+    getPostPhoto,
+    getRecommended,
+    addLike,
+    removeLike
+}
 

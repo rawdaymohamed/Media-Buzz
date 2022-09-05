@@ -5,6 +5,11 @@ import userCtrl from '../controllers/user.controller'
 const router = express.Router()
 router.param('userId', userCtrl.userByID)
 router
+    .route('/api/posts/:postId/users/:userId/likes')
+    .post(authCtrl.requireSigin, authCtrl.hasAuthorization, postCtrl.addLike)
+    .delete(authCtrl.requireSigin, authCtrl.hasAuthorization, postCtrl.removeLike)
+
+router
     .route('/api/users/:userId/posts')
     .post(authCtrl.requireSigin, authCtrl.hasAuthorization, postCtrl.create)
     .get(authCtrl.requireSigin, postCtrl.getPostsByUser)
@@ -12,8 +17,9 @@ router.route('/api/users/:userId/posts/:postId/photo').get(postCtrl.getPostPhoto
 router
     .route('/api/users/:userId/recommended/posts')
     .get(authCtrl.requireSigin, authCtrl.hasAuthorization, postCtrl.getRecommended)
-router.param('userId', userCtrl.userByID)
 
+router.param('userId', userCtrl.userByID)
 router.param('postId', postCtrl.postByID)
+
 export default router
 
