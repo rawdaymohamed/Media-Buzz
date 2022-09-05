@@ -53,9 +53,9 @@ const Home = () => {
   if (showDefaultPage) return <DefaultPage />;
   if (user)
     return (
-      <>
+      <div style={{ marginTop: '12px' }}>
         <NewsFeed user={user} />
-      </>
+      </div>
     );
 };
 export default Home;

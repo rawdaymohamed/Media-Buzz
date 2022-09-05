@@ -39,7 +39,7 @@ const NavBar = () => {
 
   const preventDefault = (e) => e.preventDefault();
   return (
-    <AppBar position='static' sx={{ mb: 3 }}>
+    <AppBar position='static'>
       <Container maxWidth='xl'>
         <Toolbar disableGutters>
           <Typography
