@@ -116,8 +116,8 @@ const checkLiked = async (req, res) => {
 }
 const createComment = async (req, res) => {
     try {
-        const userId = req.params.userId
         const postId = req.params.postId
+        const userId = req.body.userId
         const comment = { text: req.body.text }
         comment.postedBy = userId
 
