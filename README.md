@@ -67,7 +67,7 @@ cd Media-Buzz
 sudo mongod --port 27017
 ```
 
-Open a new terminal
+- Open a new terminal
 
 ```
 cd backend
@@ -77,7 +77,7 @@ npm run dev
 
 3. Run the frontend
 
-Open a new terminal
+- Open a new terminal
 
 ```
 cd frontend
