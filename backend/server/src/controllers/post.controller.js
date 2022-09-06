@@ -114,6 +114,29 @@ const checkLiked = async (req, res) => {
         return res.status(400).json({ error: 'Cannot check liked post' })
     }
 }
+const createComment = async (req, res) => {
+    try {
+        const userId = req.params.userId
+        const postId = req.params.postId
+        const comment = { text: req.body.text }
+        comment.postedBy = userId
+
+        const result = await Post.findOneAndUpdate(
+            { _id: postId },
+            {
+                $push: { comments: comment }
+            },
+            { new: true }
+        )
+            .populate('comments.postedBy', '_id name')
+            .populate('postedBy', '_id name')
+            .exec()
+
+        return res.status(200).json(result)
+    } catch (err) {
+        return res.status(400).json({ error: 'Cannot create the comment' })
+    }
+}
 export default {
     create,
     postByID,
@@ -123,6 +146,7 @@ export default {
     addLike,
     removeLike,
     getNumLikes,
-    checkLiked
+    checkLiked,
+    createComment
 }
 

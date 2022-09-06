@@ -5,6 +5,9 @@ import userCtrl from '../controllers/user.controller'
 const router = express.Router()
 router.param('userId', userCtrl.userByID)
 router
+    .route('/api/users/:userId/posts/:postId/comments')
+    .post(authCtrl.requireSigin, postCtrl.createComment)
+router
     .route('/api/posts/:postId/users/:userId/likes')
     .post(authCtrl.requireSigin, postCtrl.addLike)
     .delete(authCtrl.requireSigin, postCtrl.removeLike)
