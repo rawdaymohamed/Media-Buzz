@@ -150,6 +150,14 @@ const getCommentById = async (req, res) => {
         res.status(400).json({ error: 'Cannot get the comment' })
     }
 }
+const getAllCommentsPost = async (req, res) => {
+    try {
+        const comments = await Post.findOne({ _id: req.params.postId }).select('comments').exec()
+        return res.status(200).json(comments)
+    } catch (err) {
+        return res.status(400).json({ error: 'Cannot get comments' })
+    }
+}
 export default {
     create,
     postByID,
@@ -161,6 +169,7 @@ export default {
     getNumLikes,
     checkLiked,
     createComment,
-    getCommentById
+    getCommentById,
+    getAllCommentsPost
 }
 

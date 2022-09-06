@@ -7,6 +7,7 @@ router.param('userId', userCtrl.userByID)
 router
     .route('/api/users/:userId/posts/:postId/comments')
     .post(authCtrl.requireSigin, postCtrl.createComment)
+    .get(authCtrl.requireSigin, postCtrl.getAllCommentsPost)
 router
     .route('/api/posts/:postId/comments/:commentId')
     .get(authCtrl.requireSigin, postCtrl.getCommentById)
