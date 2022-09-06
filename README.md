@@ -2,8 +2,8 @@
 
 <div align="center">
 
-[![GitHub Issues](https://img.shields.io/github/issues/kylelobo/The-Documentation-Compendium.svg)](https://github.com/rawda-developer/Media-Buzz/issues)
-[![GitHub Pull Requests](https://img.shields.io/github/issues-pr/kylelobo/The-Documentation-Compendium.svg)](https://github.com/rawda-developer/Media-Buzz/pulls)
+[![GitHub Issues](https://img.shields.io/github/issues/kylelobo/The-Documentation-Compendium.svg)](https://github.com/rawda-yasser/Media-Buzz/issues)
+[![GitHub Pull Requests](https://img.shields.io/github/issues-pr/kylelobo/The-Documentation-Compendium.svg)](https://github.com/rawda-yasser/Media-Buzz/pulls)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
 
 </div>
@@ -57,7 +57,7 @@ npm -v
 1. Clone the project
 
 ```
-git clone https://github.com/rawda-developer/Media-Buzz
+git clone https://github.com/rawda-yasser/Media-Buzz
 cd Media-Buzz
 ```
 
