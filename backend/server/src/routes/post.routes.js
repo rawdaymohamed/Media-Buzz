@@ -8,6 +8,9 @@ router
     .route('/api/users/:userId/posts/:postId/comments')
     .post(authCtrl.requireSigin, postCtrl.createComment)
 router
+    .route('/api/posts/:postId/comments/:commentId')
+    .get(authCtrl.requireSigin, postCtrl.getCommentById)
+router
     .route('/api/posts/:postId/users/:userId/likes')
     .post(authCtrl.requireSigin, postCtrl.addLike)
     .delete(authCtrl.requireSigin, postCtrl.removeLike)

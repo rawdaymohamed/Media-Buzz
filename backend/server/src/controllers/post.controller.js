@@ -137,6 +137,19 @@ const createComment = async (req, res) => {
         return res.status(400).json({ error: 'Cannot create the comment' })
     }
 }
+const getCommentById = async (req, res) => {
+    try {
+        const post = await Post.findOne({ _id: req.params.postId }).select('comments').exec()
+        for (const c of post.comments) {
+            if (c._id == req.params.commentId) {
+                return res.status(200).json(c)
+            }
+        }
+        return res.status(404).json({ error: 'Comment not found' })
+    } catch (err) {
+        res.status(400).json({ error: 'Cannot get the comment' })
+    }
+}
 export default {
     create,
     postByID,
@@ -147,6 +160,7 @@ export default {
     removeLike,
     getNumLikes,
     checkLiked,
-    createComment
+    createComment,
+    getCommentById
 }
 
