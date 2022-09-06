@@ -5,10 +5,12 @@ import userCtrl from '../controllers/user.controller'
 const router = express.Router()
 router.param('userId', userCtrl.userByID)
 router
-    .route('/api/posts/:postId/comments/:commentId')
+    .route('/api/users/:userId/posts/:postId/comments/:commentId')
     .get(authCtrl.requireSigin, postCtrl.getCommentById)
+    .put(authCtrl.requireSigin, authCtrl.hasAuthorization, postCtrl.updateComment)
+    .delete(authCtrl.requireSigin, authCtrl.hasAuthorization, postCtrl.deleteComment)
 router
-    .route('/api/posts/:postId/comments')
+    .route('/api/users/:userId/posts/:postId/comments')
     .post(authCtrl.requireSigin, postCtrl.createComment)
     .get(authCtrl.requireSigin, postCtrl.getAllCommentsPost)
 router

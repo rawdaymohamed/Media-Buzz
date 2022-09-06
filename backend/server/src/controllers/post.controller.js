@@ -158,6 +158,37 @@ const getAllCommentsPost = async (req, res) => {
         return res.status(400).json({ error: 'Cannot get comments' })
     }
 }
+const updateComment = async (req, res) => {
+    try {
+        const result = await Post.findOneAndUpdate(
+            { 'comments._id': req.params.commentId },
+            {
+                $set: {
+                    'comments.$.text': req.body.text
+                }
+            },
+            { new: true }
+        )
+
+        return res.status(200).json(result)
+    } catch (err) {
+        return res.status(400).json({ error: 'Cannot update comment' })
+    }
+}
+const deleteComment = async (req, res) => {
+    try {
+        const result = await Post.findOneAndUpdate(
+            { 'comments._id': req.params.commentId },
+            {
+                $pull: { comments: { _id: req.params.commentId } }
+            },
+            { safe: true }
+        )
+        return res.status(200).json(result)
+    } catch (err) {
+        res.status(400).json({ error: 'Cannot delete comment' })
+    }
+}
 export default {
     create,
     postByID,
@@ -168,8 +199,10 @@ export default {
     removeLike,
     getNumLikes,
     checkLiked,
-    createComment,
     getCommentById,
-    getAllCommentsPost
+    getAllCommentsPost,
+    createComment,
+    updateComment,
+    deleteComment
 }
 
