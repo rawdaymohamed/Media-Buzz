@@ -17,6 +17,13 @@ const CommentList = ({
         setComments(data.comments);
       });
   };
+  const onDelete = (id) => {
+    const jwt = isAuthenticated();
+    if (jwt)
+      apiPost
+        .deleteCommentById(jwt.user._id, postId, id, jwt)
+        .then((data) => setComments(data.comments));
+  };
   return (
     <>
       <NewCommentForm addComment={addComment} />
@@ -27,6 +34,7 @@ const CommentList = ({
             userId={userId}
             userName={userName}
             comment={c}
+            onDelete={onDelete}
           />
         ))}
     </>
