@@ -28,6 +28,9 @@ existing social media platforms such as Facebook and Twitter.
 
 This project is built with the MERN Stack and has the following features:
 
+![](./imgs/media-buzz-2.png)
+![](./imgs/media-buzz.png)
+
 ### Done
 
 - User Authentication
@@ -38,9 +41,6 @@ This project is built with the MERN Stack and has the following features:
 - Posting messages with photos
 - Newsfeed with posts from followed users
 - Liking posts
-
-### ToDo
-
 - Commenting on posts
 
 ## 🏁 Getting Started <a name = "getting_started"></a>

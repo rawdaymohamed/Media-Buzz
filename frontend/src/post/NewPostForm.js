@@ -29,7 +29,7 @@ const NewPostForm = ({ user }) => {
     postText && postData.append('text', postText);
     photo && postData.append('photo', photo);
     if (jwt) {
-      apiPost.createPost(jwt.user._id, jwt, postData).then((data) => {
+      apiPost.createPost(user._id, jwt, postData).then((data) => {
         if (data && data.error) {
           setError(data.error);
         } else {
