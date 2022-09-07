@@ -87,6 +87,80 @@ const checkLiked = async (postId, userId) => {
     console.log(err);
   }
 };
+const getAllCommentsPost = async (userId, postId, jwt) => {
+  try {
+    const response = await fetch(
+      `/api/users/${userId}/posts/${postId}/comments`,
+      {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+          Authorization: `Bearer ${jwt.token}`,
+        },
+      }
+    );
+    return await response.json();
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const createComment = async (userId, postId, jwt, comment) => {
+  const response = await fetch(
+    `/api/users/${userId}/posts/${postId}/comments`,
+    {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        Authorization: `Bearer ${jwt.token}`,
+      },
+      body: comment,
+    }
+  );
+  return await response.json();
+};
+
+const getCommentById = async (userId, postId, commentId, jwt) => {
+  const response = await fetch(
+    `/api/users/${userId}/posts/${postId}/comments/${commentId}`,
+    {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        Authorization: `Bearer ${jwt.token}`,
+      },
+    }
+  );
+  return await response.json();
+};
+const updateCommentById = async (userId, postId, commentId, jwt, comment) => {
+  const response = await fetch(
+    `/api/users/${userId}/posts/${postId}/comments/${commentId}`,
+    {
+      method: 'PUT',
+      headers: {
+        Accept: 'application/json',
+        Authorization: `Bearer ${jwt.token}`,
+      },
+      body: comment,
+    }
+  );
+  return await response.json();
+};
+const deleteCommentById = async (userId, postId, commentId, jwt) => {
+  const response = await fetch(
+    `/api/users/${userId}/posts/${postId}/comments/${commentId}`,
+    {
+      method: 'DELETE',
+      headers: {
+        Accept: 'application/json',
+        Authorization: `Bearer ${jwt.token}`,
+      },
+    }
+  );
+  return await response.json();
+};
+
 export default {
   getPostsByUser,
   createPost,
@@ -95,4 +169,9 @@ export default {
   removeLike,
   getNumLikes,
   checkLiked,
+  getAllCommentsPost,
+  createComment,
+  getCommentById,
+  updateCommentById,
+  deleteCommentById,
 };
