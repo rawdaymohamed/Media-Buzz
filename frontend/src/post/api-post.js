@@ -105,60 +105,77 @@ const getAllCommentsPost = async (userId, postId, jwt) => {
   }
 };
 
-const createComment = async (userId, postId, jwt, comment) => {
-  const response = await fetch(
-    `/api/users/${userId}/posts/${postId}/comments`,
-    {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        Authorization: `Bearer ${jwt.token}`,
-      },
-      body: comment,
-    }
-  );
-  return await response.json();
+const createComment = async (userId, postId, jwt, text) => {
+  try {
+    const response = await fetch(
+      `/api/users/${userId}/posts/${postId}/comments`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          Authorization: `Bearer ${jwt.token}`,
+        },
+        body: JSON.stringify({ text }),
+      }
+    );
+    return await response.json();
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 const getCommentById = async (userId, postId, commentId, jwt) => {
-  const response = await fetch(
-    `/api/users/${userId}/posts/${postId}/comments/${commentId}`,
-    {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        Authorization: `Bearer ${jwt.token}`,
-      },
-    }
-  );
-  return await response.json();
+  try {
+    const response = await fetch(
+      `/api/users/${userId}/posts/${postId}/comments/${commentId}`,
+      {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+          Authorization: `Bearer ${jwt.token}`,
+        },
+      }
+    );
+    return await response.json();
+  } catch (err) {
+    console.log(err);
+  }
 };
-const updateCommentById = async (userId, postId, commentId, jwt, comment) => {
-  const response = await fetch(
-    `/api/users/${userId}/posts/${postId}/comments/${commentId}`,
-    {
-      method: 'PUT',
-      headers: {
-        Accept: 'application/json',
-        Authorization: `Bearer ${jwt.token}`,
-      },
-      body: comment,
-    }
-  );
-  return await response.json();
+const updateCommentById = async (userId, postId, commentId, jwt, text) => {
+  try {
+    const response = await fetch(
+      `/api/users/${userId}/posts/${postId}/comments/${commentId}`,
+      {
+        method: 'PUT',
+        headers: {
+          Accept: 'application/json',
+          Authorization: `Bearer ${jwt.token}`,
+        },
+        body: JSON.stringify({ text }),
+      }
+    );
+    return await response.json();
+  } catch (err) {
+    console.log(err);
+  }
 };
 const deleteCommentById = async (userId, postId, commentId, jwt) => {
-  const response = await fetch(
-    `/api/users/${userId}/posts/${postId}/comments/${commentId}`,
-    {
-      method: 'DELETE',
-      headers: {
-        Accept: 'application/json',
-        Authorization: `Bearer ${jwt.token}`,
-      },
-    }
-  );
-  return await response.json();
+  try {
+    const response = await fetch(
+      `/api/users/${userId}/posts/${postId}/comments/${commentId}`,
+      {
+        method: 'DELETE',
+        headers: {
+          Accept: 'application/json',
+          Authorization: `Bearer ${jwt.token}`,
+        },
+      }
+    );
+    return await response.json();
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 export default {

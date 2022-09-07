@@ -90,6 +90,7 @@ const removeLike = async (req, res) => {
             { $pull: { likes: req.params.userId } },
             { new: true }
         )
+
         res.status(200).json(post)
     } catch (err) {
         return res.status(400).json({ error: 'Cannot like the post' })
@@ -117,7 +118,7 @@ const checkLiked = async (req, res) => {
 const createComment = async (req, res) => {
     try {
         const postId = req.params.postId
-        const userId = req.body.userId
+        const userId = req.params.userId
         const comment = { text: req.body.text }
         comment.postedBy = userId
 
