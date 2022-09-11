@@ -1,9 +1,9 @@
-<h3 align="center">Media Buzz</h3>
+<h3 align="center">Classroom Infinity</h3>
 
 <div align="center">
 
-[![GitHub Issues](https://img.shields.io/github/issues/kylelobo/The-Documentation-Compendium.svg)](https://github.com/rawda-yasser/Media-Buzz/issues)
-[![GitHub Pull Requests](https://img.shields.io/github/issues-pr/kylelobo/The-Documentation-Compendium.svg)](https://github.com/rawda-yasser/Media-Buzz/pulls)
+[![GitHub Issues](https://img.shields.io/github/issues/kylelobo/The-Documentation-Compendium.svg)](https://github.com/rawda-developer/Media-Buzz/issues)
+[![GitHub Pull Requests](https://img.shields.io/github/issues-pr/kylelobo/The-Documentation-Compendium.svg)](https://github.com/rawda-developer/Media-Buzz/pulls)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
 
 </div>
@@ -11,9 +11,7 @@
 ---
 
 <p align="center"> 
-Media Buzz is a social media application inspired by
-existing social media platforms such as Facebook and Twitter.
-    <br> 
+Classroom infinity is an online classroom platform which allows instructors to add/update/delete courses. Each course is made of various lessons and every student can enroll in courses and track their progress. Instructors can track how many students have enrolled in a course, and how many have completed each course.  <br> 
 </p>
 
 ## 📝 Table of Contents
@@ -26,22 +24,25 @@ existing social media platforms such as Facebook and Twitter.
 
 ## 🧐 About <a name = "about"></a>
 
-This project is built with the MERN Stack and has the following features:
+This project is built with the MERN Stack and has the following
 
-![](./imgs/media-buzz-2.png)
-![](./imgs/media-buzz.png)
+### TODO
 
-### Done
+- Instructor can publish courses
+- Instructor can Update their course
+- Instructor can Delete their course
+- Instructor can add new lesson to a course
+- Students can enroll in courses
+- Students can Show Enrolled courses
+- Students can track progress and enrollment stats
+
+### DONE
 
 - User Authentication
-- User profile with a description and a photo
-- Users following each other
-- Who to follow suggestions
-- Listing posts by user
-- Posting messages with photos
-- Newsfeed with posts from followed users
-- Liking posts
-- Commenting on posts
+- Profile page
+- Edit profile page
+- Delete User
+- Add Instructor role
 
 ## 🏁 Getting Started <a name = "getting_started"></a>
 
@@ -57,7 +58,7 @@ npm -v
 1. Clone the project
 
 ```
-git clone https://github.com/rawda-yasser/Media-Buzz
+git clone https://github.com/rawda-developer/Media-Buzz
 cd Media-Buzz
 ```
 
@@ -87,7 +88,7 @@ npm start
 
 ## 🎈 Usage <a name="usage"></a>
 
-Use this project as a guideline for building your Social Network website using the MERN stack and Material UI.
+Use this project as a guideline for building your next full stack website using MERN stack and Material UI.
 
 ## ⛏️ Built Using <a name = "built_using"></a>
 
@@ -98,4 +99,4 @@ Use this project as a guideline for building your Social Network website using t
 
 ## ✍️ Authors <a name = "authors"></a>
 
-- [@RawdaYasser](https://github.com/rawda-yasser/) - Idea & Initial work
+- [@RawdaDeveloper](https://github.com/rawda-developer/) - Idea & Initial work
