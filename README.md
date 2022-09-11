@@ -1,4 +1,4 @@
-<h3 align="center">Classroom Infinity</h3>
+<h3 align="center">Media Buzz</h3>
 
 <div align="center">
 
@@ -11,7 +11,8 @@
 ---
 
 <p align="center"> 
-Classroom infinity is an online classroom platform which allows instructors to add/update/delete courses. Each course is made of various lessons and every student can enroll in courses and track their progress. Instructors can track how many students have enrolled in a course, and how many have completed each course.  <br> 
+Media Buzz is a social media application inspired by
+existing social media platforms such as Facebook and Twitter <br> 
 </p>
 
 ## 📝 Table of Contents
@@ -24,25 +25,21 @@ Classroom infinity is an online classroom platform which allows instructors to a
 
 ## 🧐 About <a name = "about"></a>
 
+![](./imgs/media-buzz-2.png)
+![](./imgs/media-buzz.png)
 This project is built with the MERN Stack and has the following
 
-### TODO
-
-- Instructor can publish courses
-- Instructor can Update their course
-- Instructor can Delete their course
-- Instructor can add new lesson to a course
-- Students can enroll in courses
-- Students can Show Enrolled courses
-- Students can track progress and enrollment stats
-
-### DONE
+### Done
 
 - User Authentication
-- Profile page
-- Edit profile page
-- Delete User
-- Add Instructor role
+- User profile with a description and a photo
+- Users following each other
+- Who to follow suggestions
+- Listing posts by user
+- Posting messages with photos
+- Newsfeed with posts from followed users
+- Liking posts
+- Commenting on posts
 
 ## 🏁 Getting Started <a name = "getting_started"></a>
 
