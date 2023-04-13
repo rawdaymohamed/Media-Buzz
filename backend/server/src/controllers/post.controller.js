@@ -91,9 +91,9 @@ const removeLike = async (req, res) => {
             { new: true }
         )
 
-        res.status(200).json(post)
+        return res.status(200).json(post)
     } catch (err) {
-        return res.status(400).json({ error: 'Cannot like the post' })
+        return res.status(400).json({ error: 'Cannot unlike the post' })
     }
 }
 const getNumLikes = async (req, res) => {
@@ -108,7 +108,9 @@ const getNumLikes = async (req, res) => {
 const checkLiked = async (req, res) => {
     try {
         const user = await User.findOne({ _id: req.params.userId })
+
         const post = await Post.findOne({ _id: req.params.postId })
+
         if (post.likes.includes(user._id)) return res.status(200).json({ liked: true })
         return res.status(200).json({ liked: false })
     } catch (err) {
@@ -153,7 +155,10 @@ const getCommentById = async (req, res) => {
 }
 const getAllCommentsPost = async (req, res) => {
     try {
-        const comments = await Post.findOne({ _id: req.params.postId }).select('comments').exec()
+        const comments = await Post.findOne({ _id: req.params.postId })
+            .select('comments')
+            .populate('comments.postedBy', '_id name')
+            .exec()
         return res.status(200).json(comments)
     } catch (err) {
         return res.status(400).json({ error: 'Cannot get comments' })

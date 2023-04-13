@@ -23,42 +23,51 @@ const Post = ({ userId, userName, post }) => {
   const [comments, setComments] = useState([]);
   const [toggleComments, setToggleComments] = useState(false);
   useEffect(() => {
-    apiPost.checkLiked(post._id, userId).then((data) => {
+    apiPost.checkLiked(post._id, isAuthenticated().user._id).then((data) => {
       if (data && data.error) {
         setError(data.error);
       } else if (data) {
+        console.log(data);
+        setError("");
         setLiked(data.liked);
       }
-      apiPost.getNumLikes(post._id).then((data) => {
-        if (data && data.error) {
-          setError(data.error);
-        } else if (data) {
-          setNumberOfLikes(data.numberOfLikes);
-        }
-      });
-      const jwt = isAuthenticated();
-      apiPost.getAllCommentsPost(userId, post._id, jwt).then((data) => {
-        if (data && data.error) {
-          setError(data.error);
-        } else if (data) {
-          console.log(data);
-          setComments(data.comments);
-          setNumberOfComments(data.comments.length);
-        }
-      });
+      
+    });
+    apiPost.getNumLikes(post._id).then((data) => {
+      if (data && data.error) {
+        setError(data.error);
+      } else if (data) {
+        console.log(data);
+        setNumberOfLikes(data.numberOfLikes);
+        setError("");
+      }
+    });
+    const jwt = isAuthenticated();
+    apiPost.getAllCommentsPost(userId, post._id, jwt).then((data) => {
+      if (data && data.error) {
+        setError(data.error);
+      } else if (data) {
+        console.log(data);
+        setComments(data.comments);
+        setNumberOfComments(data.comments.length);
+        setError("");
+      }
     });
   }, [liked, userId, post]);
   const clickLikeBtn = () => {
     const jwt = isAuthenticated();
     if (liked) {
-      apiPost.removeLike(post._id, userId, jwt).then((data) => {
+      apiPost.removeLike(post._id, isAuthenticated().user._id, jwt).then((data) => {
+      
         if (data && data.error) setError(data.error);
         else setLiked(false);
+        
       });
     } else {
-      apiPost.addLike(post._id, userId, jwt).then((data) => {
+      apiPost.addLike(post._id, isAuthenticated().user._id, jwt).then((data) => {
         if (data && data.error) setError(data.error);
         else setLiked(true);
+        
       });
     }
   };
@@ -121,6 +130,7 @@ const Post = ({ userId, userName, post }) => {
       ) : (
         ''
       )}
+      {error && <Typography variant='body2'>{error}</Typography>} 
     </>
   );
 };

@@ -121,7 +121,9 @@ const Profile = () => {
           </List>
           <Divider />
 
-          <ProfileTabs user={user} />
+          <ProfileTabs 
+            user={user}
+          />
           {error && (
             <Typography
               component='p'

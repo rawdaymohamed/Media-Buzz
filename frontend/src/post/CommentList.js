@@ -31,8 +31,8 @@ const CommentList = ({
         comments.map((c) => (
           <Comment
             key={c._id}
-            userId={isAuthenticated().user._id}
-            userName={isAuthenticated().user.name}
+            userId={c.postedBy._id}
+            userName={c.postedBy.name}
             comment={c}
             onDelete={onDelete}
           />

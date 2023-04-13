@@ -1,30 +1,30 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import {
   Card,
   CardActionArea,
   CardMedia,
   Typography,
   CardContent,
-} from '@mui/material';
+} from "@mui/material";
 
-import socialMedia from '../assets/images/background.webp';
-import { read } from '../user/api-user';
-import { isAuthenticated } from '../auth/auth-helper';
-import NewsFeed from '../post/NewsFeed';
+import socialMedia from "../assets/images/background.webp";
+import { read } from "../user/api-user";
+import { isAuthenticated } from "../auth/auth-helper";
+import NewsFeed from "../post/NewsFeed";
 const DefaultPage = () => (
-  <Card sx={{ mx: 'auto', my: 1, maxWidth: 400 }}>
+  <Card sx={{ mx: "auto", my: 1, maxWidth: 400 }}>
     <CardActionArea>
       <CardMedia
-        component='img'
-        height='300'
+        component="img"
+        height="300"
         image={socialMedia}
-        alt='green leaves'
+        alt="green leaves"
       />
       <CardContent>
-        <Typography gutterBottom variant='h5' component='div'>
+        <Typography gutterBottom variant="h5" component="div">
           MediaBuzz
         </Typography>
-        <Typography variant='body2' color='text.secondary'>
+        <Typography variant="body2" color="text.secondary">
           Welcome to the MediaBuzz Project.
         </Typography>
       </CardContent>
@@ -53,7 +53,7 @@ const Home = () => {
   if (showDefaultPage) return <DefaultPage />;
   if (user)
     return (
-      <div style={{ marginTop: '12px' }}>
+      <div style={{ marginTop: "12px" }}>
         <NewsFeed user={user} />
       </div>
     );
