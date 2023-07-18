@@ -55,7 +55,7 @@ npm -v
 1. Clone the project
 
 ```
-git clone https://github.com/rawda-developer/Media-Buzz
+git clone https://github.com/rawda-yasser/Media-Buzz
 cd Media-Buzz
 ```
 
@@ -96,4 +96,4 @@ Use this project as a guideline for building your next full stack website using 
 
 ## ✍️ Authors <a name = "authors"></a>
 
-- [@RawdaDeveloper](https://github.com/rawda-developer/) - Idea & Initial work
+- [@RawdaYasser](https://github.com/rawda-yasser/) - Idea & Initial work
