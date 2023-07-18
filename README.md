@@ -27,7 +27,10 @@ existing social media platforms such as Facebook and Twitter <br>
 
 ![](./imgs/media-buzz-2.png)
 ![](./imgs/media-buzz.png)
-This project is built with the MERN Stack and has the following
+
+This project is built with the MERN Stack.
+
+## Features
 
 ### Done
 
