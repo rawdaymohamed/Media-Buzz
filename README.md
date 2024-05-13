@@ -11,8 +11,7 @@
 ---
 
 <p align="center"> 
-Media Buzz is a social media application inspired by
-existing social media platforms such as Facebook and Twitter <br> 
+Media Buzz is a social media application inspired by existing social media platforms such as Facebook and Twitter <br> 
 </p>
 
 ## 📝 Table of Contents
@@ -23,26 +22,19 @@ existing social media platforms such as Facebook and Twitter <br>
 - [Built Using](#built_using)
 - [Authors](#authors)
 
-## 🧐 About <a name = "about"></a>
-
-![](./imgs/media-buzz-2.png)
-![](./imgs/media-buzz.png)
-
-This project is built with the MERN Stack.
-
 ## Features
 
 ### Done
 
-- User Authentication
-- User profile with a description and a photo
-- Users following each other
-- Who to follow suggestions
+- User Authentication and authorization using JWT and Express.js middleware
+- User can add/update/delete their profile information
+- Users can follow each other
+- Recommendation to follow other people
 - Listing posts by user
-- Posting messages with photos
+- Creating a post with photos
 - Newsfeed with posts from followed users
-- Liking posts
-- Commenting on posts
+- Users can like posts from other users or their own posts
+- Users can add a comment on any post in the system
 
 ## 🏁 Getting Started <a name = "getting_started"></a>
 
@@ -99,4 +91,4 @@ Use this project as a guideline for building your next full stack website using 
 
 ## ✍️ Authors <a name = "authors"></a>
 
-- [@RawdaYasser](https://github.com/rawda-yasser/) - Idea & Initial work
+- [@RawdaYasser](https://github.com/rawdaymohamed/) - Idea & Initial work
