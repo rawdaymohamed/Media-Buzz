@@ -50,7 +50,7 @@ npm -v
 1. Clone the project
 
 ```
-git clone https://github.com/rawda-yasser/Media-Buzz
+git clone https://github.com/rawdaymohamed/Media-Buzz
 cd Media-Buzz
 ```
 
