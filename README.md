@@ -21,7 +21,10 @@ Media Buzz is a social media application inspired by existing social media platf
 - [Usage](#usage)
 - [Built Using](#built_using)
 - [Authors](#authors)
-
+## Images
+![](./imgs/media-buzz-1.png)
+![](./imgs/media-buzz-1.png)
+![](./imgs/media-buzz.png)
 ## Features
 
 ### Done
